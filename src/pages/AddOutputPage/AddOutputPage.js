@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import axios from "axios";
 
-export default function AddEntriesPage(){
+export default function AddOutputPage(){
     return(
-        <ContainerAddEntries>
-            <HeaderAddEntries>Nova entrada</HeaderAddEntries>
-            <ContainerInputsEntries >
+        <ContainerAddOutput>
+            <HeaderAddOutput>Nova saída</HeaderAddOutput>
+            <ContainerInputsOutput>
                 <input
                     type="number"
                     placeholder="Valor"
@@ -18,16 +18,16 @@ export default function AddEntriesPage(){
                     name="Valor"
                     required
                 />
-            </ContainerInputsEntries >
-            <ContainerButtonEntries>
-                <button>Salvar entrada</button>
+            </ContainerInputsOutput>
+            <ContainerButtonOutput>
+                <button>Salvar saída</button>
                 <span>Cancelar</span>
-            </ContainerButtonEntries>
-        </ContainerAddEntries>
+            </ContainerButtonOutput>
+        </ContainerAddOutput>
     )
 }
 
-const ContainerAddEntries = styled.div`
+const ContainerAddOutput = styled.div`
     width: 100vw;
     height: 100vh;
     background-color: #8C11BE;
@@ -36,7 +36,7 @@ const ContainerAddEntries = styled.div`
     justify-content: top;
     align-items: center;
 `
-const HeaderAddEntries = styled.header`
+const HeaderAddOutput = styled.header`
     width: 100%;
     height: auto;
     box-sizing: border-box;
@@ -50,7 +50,7 @@ const HeaderAddEntries = styled.header`
     line-height: 31px;
     color: #FFFFFF;
 `
-const ContainerInputsEntries = styled.div`
+const ContainerInputsOutput = styled.div`
     width: 100%;
     background-color: #8C11BE;
     margin-top: 40px;
@@ -75,7 +75,7 @@ const ContainerInputsEntries = styled.div`
         }
     }
 `
-const ContainerButtonEntries = styled.div`
+const ContainerButtonOutput = styled.div`
     width: 100%;
     background-color: #8C11BE;
     display: flex;

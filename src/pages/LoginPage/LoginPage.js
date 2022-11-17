@@ -88,7 +88,7 @@ const ContainerButtonEnter = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #FFFFFF;
-        background-image: linear-gradient(92.88deg, #DA70D6 9.16%, #BA55D3 43.89%, #A328D6 64.72%);
+        background-image: linear-gradient(92.88deg, #b60570 9.16%, #631e75 43.89%, #A328D6 64.72%);
         border-radius: 8px;
         border-style: none;
         box-sizing: border-box;
