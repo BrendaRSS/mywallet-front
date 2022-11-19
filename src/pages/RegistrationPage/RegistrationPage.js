@@ -1,32 +1,79 @@
 import styled from "styled-components";
 import axios from "axios";
 import HeaderLogo from "../../components/HeaderLogo";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react"
+import { DadosContext } from "../../context/DadosContext"
+import joi from "joi";
 
 export default function RegistrationPage() {
+
+    const {
+        name, setName,
+        email, setEmail,
+        password, setPassword,
+        confirmPassword, setConfirmPassword
+    } = useContext(DadosContext);
+    const navigate = useNavigate();
+
+    function enviarDadosCadastro(event) {
+        event.preventDefault();
+
+        if (confirmPassword !== password) {
+            alert("Por favor, preencha a senha igual para os dois campos!")
+        } else {
+            const body = { name, email, password }
+            axios.post("http://localhost:5000/sign-up", body)
+                .then((resposta) => {
+                    console.log(resposta.data);
+                    navigate("/");
+                })
+                .catch((error) => {
+                    console.log(error.response.data);
+                    const status = error.response.status
+                    if (status === 409) {
+                        alert(error.response.data.message);
+                    }
+                    if (status === 422) {
+                        alert("Preencha os dados corretamente! Senha maior que 4 caracteres! Email precia ser válido: exemplo@gmail.com")
+                    }
+                })
+        }
+
+    }
+
     return (
         <ContainerRegistration>
             <HeaderLogo />
-            <form>
+            <form onSubmit={enviarDadosCadastro}>
                 <ContainerInputsRegistration>
                     <input
+                        onChange={e => setName(e.target.value)}
+                        value={name}
                         type="text"
                         placeholder="Nome"
                         name="Nome"
                         required
                     />
                     <input
+                        onChange={e => setEmail(e.target.value)}
+                        value={email}
                         type="email"
                         placeholder="E-mail"
                         name="Email"
                         required
                     />
                     <input
+                        onChange={e => setPassword(e.target.value)}
+                        value={password}
                         type="password"
                         placeholder="Senha"
                         name="Senha"
                         required
                     />
                     <input
+                        onChange={e => setConfirmPassword(e.target.value)}
+                        value={confirmPassword}
                         type="password"
                         placeholder="Confirme a senha"
                         name="Confirme a senha"
@@ -35,7 +82,10 @@ export default function RegistrationPage() {
                 </ContainerInputsRegistration>
                 <ContainerButtonRegister>
                     <button type="submit">Cadastrar</button>
-                    <span>Já tem uam conta? Entre agora!</span>
+
+                    <Link to={"/"}>
+                        <span>Já tem uam conta? Entre agora!</span>
+                    </Link>
                 </ContainerButtonRegister>
             </form>
         </ContainerRegistration>
@@ -80,7 +130,7 @@ const ContainerInputsRegistration = styled.div`
         }
     }
 `
-const ContainerButtonRegister=styled.div`
+const ContainerButtonRegister = styled.div`
     width: 100%;
     height: auto;
     display: flex;
@@ -127,5 +177,9 @@ const ContainerButtonRegister=styled.div`
             font-size: 15px;
             line-height: 18px;
             color: #FFFFFF;
+        }
+        a{
+            margin-top: 36px;
+            text-decoration: none;
         }
 `

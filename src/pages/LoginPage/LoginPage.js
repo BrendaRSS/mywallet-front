@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import axios from "axios";
 import HeaderLogo from "../../components/HeaderLogo";
+import {Link} from "react-router-dom";
 
 export default function LoginPage() {
 
@@ -26,7 +27,9 @@ export default function LoginPage() {
                 </ContainerInputsLogin>
                 <ContainerButtonEnter>
                     <button type="submit">Entrar</button>
+                    <Link to={"/cadastro"}>
                     <span>Primeira vez? Cadastre-se!</span>
+                    </Link>
                 </ContainerButtonEnter>
             </form>
         </ ContainerLogin>
@@ -121,5 +124,6 @@ const ContainerButtonEnter = styled.div`
         }
         a{
             text-decoration: none;
+            margin-top: 36px;
         }
 `
