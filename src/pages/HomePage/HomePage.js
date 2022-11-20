@@ -2,8 +2,36 @@ import styled from "styled-components";
 import axios from "axios";
 import { IoExitOutline } from "react-icons/io5"
 import FooterHomePage from "../../components/FooterHomePage";
+import { useContext, useEffect } from "react";
+import { DadosContext } from "../../context/DadosContext";
+import Transacoes from "../../components/Transacoes";
 
 export default function HomePage() {
+    const {
+        name, token, transacoes, setTransacoes
+    } = useContext(DadosContext);
+
+    useEffect(() => {
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+
+        axios.get("http://localhost:5000/transacoes", config)
+            .then((resposta) => {
+                console.log(resposta.data);
+                setTransacoes(resposta.data)
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+            })
+    }, [])
+
+    if (transacoes === undefined) {
+        return <div>Carregando...</div>
+    }
+
     return (
         <ContainerHomePage>
             <HeaderHomePage>
@@ -11,7 +39,10 @@ export default function HomePage() {
             </HeaderHomePage>
             <ContainerRecords>
                 <RecordsScreen>
-                    Não há registros de <br/> entrada ou saída
+                    {transacoes.length === 0 ?
+                        <span>Não há registros de <br /> entrada ou saída</span>
+                        : <Transacoes transacoes={transacoes}/>
+                    }
                 </RecordsScreen>
             </ContainerRecords>
             <FooterHomePage />
@@ -59,6 +90,10 @@ const RecordsScreen = styled.div`
     width: 326px;
     height: 446px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     background: #FFFFFF;
     border-radius: 5px;
     font-family: 'Raleway';

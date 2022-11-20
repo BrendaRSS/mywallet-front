@@ -1,13 +1,25 @@
 import styled from "styled-components";
 import axios from "axios";
-import { TbCirclePlus } from "react-icons/tb"
-import { TbCircleMinus } from "react-icons/tb"
+import { TbCirclePlus } from "react-icons/tb";
+import { TbCircleMinus } from "react-icons/tb";
+import { useContext } from "react";
+import { DadosContext } from "../context/DadosContext";
 
 export default function FooterHomePage() {
+    const {
+        token
+    } = useContext(DadosContext);
+  
+    console.log(token)
+
+    function teste(){
+        console.log(token)
+    }
+
     return (
         <ContainerFooter>
             <ButtonEntries><TbCirclePlus/>Nova <br /> entrada</ButtonEntries>
-            <ButtonOutputs>< TbCircleMinus/>Nova <br /> saída</ButtonOutputs>
+            <ButtonOutputs onClick={teste}>< TbCircleMinus/>Nova <br /> saída</ButtonOutputs>
         </ContainerFooter>
     )
 }

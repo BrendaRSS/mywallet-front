@@ -1,12 +1,35 @@
 import styled from "styled-components";
 import axios from "axios";
 import HeaderLogo from "../../components/HeaderLogo";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { DadosContext } from "../../context/DadosContext";
 
 export default function LoginPage() {
+    const {
+        name, setName,
+        email, setEmail,
+        password, setPassword,
+        token, setToken
+    } = useContext(DadosContext);
+    const navigate = useNavigate();
 
-    function enviarDadosLogin(event){
+    function enviarDadosLogin(event) {
         event.preventDefault()
+        
+        const body = {email, password};
+
+        axios.post("http://localhost:5000/sign-in", body)
+        .then((resposta)=>{
+            console.log(body);
+            setToken(resposta.data.token);
+            setEmail("");
+            setPassword("");
+            navigate("/home");
+        })
+        .catch((error)=>{
+            console.log(error.response.data);
+        })
     }
 
     return (
@@ -15,11 +38,15 @@ export default function LoginPage() {
             <form onSubmit={enviarDadosLogin}>
                 <ContainerInputsLogin>
                     <input
+                        onChange={e => setEmail(e.target.value)}
+                        value={email}
                         type="email"
                         placeholder="E-mail"
                         required
                     />
                     <input
+                        onChange={e => setPassword(e.target.value)}
+                        value={password}
                         type="password"
                         placeholder="Senha"
                         required
@@ -28,7 +55,7 @@ export default function LoginPage() {
                 <ContainerButtonEnter>
                     <button type="submit">Entrar</button>
                     <Link to={"/cadastro"}>
-                    <span>Primeira vez? Cadastre-se!</span>
+                        <span>Primeira vez? Cadastre-se!</span>
                     </Link>
                 </ContainerButtonEnter>
             </form>

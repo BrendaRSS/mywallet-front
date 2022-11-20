@@ -2,8 +2,8 @@ import styled from "styled-components";
 import axios from "axios";
 import HeaderLogo from "../../components/HeaderLogo";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react"
-import { DadosContext } from "../../context/DadosContext"
+import { useContext } from "react";
+import { DadosContext } from "../../context/DadosContext";
 import joi from "joi";
 
 export default function RegistrationPage() {
@@ -26,6 +26,10 @@ export default function RegistrationPage() {
             axios.post("http://localhost:5000/sign-up", body)
                 .then((resposta) => {
                     console.log(resposta.data);
+                    setName("");
+                    setEmail("");
+                    setPassword("");
+                    setConfirmPassword("");
                     navigate("/");
                 })
                 .catch((error) => {
