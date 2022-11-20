@@ -58,6 +58,9 @@ const ContainerHomePage = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    a{
+        text-decoration: none;
+    }
 `
 const HeaderHomePage = styled.header`
     width: 100%;
@@ -87,6 +90,7 @@ const ContainerRecords = styled.div`
     height: auto;
 `
 const RecordsScreen = styled.div`
+    overflow-y: scroll;
     width: 326px;
     height: 446px;
     margin: 0 auto;
@@ -103,4 +107,9 @@ const RecordsScreen = styled.div`
     line-height: 23px;
     text-align: center;
     color: #868686;
+    ::-webkit-scrollbar-track-piece{
+        width: 15px;
+        border: 5px;
+        background-color: red;
+    }
 `

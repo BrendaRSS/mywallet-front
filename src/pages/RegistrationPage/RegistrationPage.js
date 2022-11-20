@@ -4,7 +4,6 @@ import HeaderLogo from "../../components/HeaderLogo";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { DadosContext } from "../../context/DadosContext";
-import joi from "joi";
 
 export default function RegistrationPage() {
 

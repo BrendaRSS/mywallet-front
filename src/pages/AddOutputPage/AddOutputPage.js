@@ -1,29 +1,66 @@
 import styled from "styled-components";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { DadosContext } from "../../context/DadosContext";
 
-export default function AddOutputPage(){
-    return(
-        <ContainerAddOutput>
-            <HeaderAddOutput>Nova saída</HeaderAddOutput>
-            <ContainerInputsOutput>
-                <input
-                    type="number"
-                    placeholder="Valor"
-                    name="Valor"
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Descrição"
-                    name="Valor"
-                    required
-                />
-            </ContainerInputsOutput>
-            <ContainerButtonOutput>
-                <button>Salvar saída</button>
-                <span>Cancelar</span>
-            </ContainerButtonOutput>
-        </ContainerAddOutput>
+export default function AddOutputPage() {
+    const {
+        value, setValue, description, setDescription, token
+    } = useContext(DadosContext);
+    const navigate = useNavigate();
+
+    function addNewOutput(event){
+        event.preventDefault();
+
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+
+        const body = {value, description, type: "saída"};
+
+        axios.post("http://localhost:5000/transacoes", body, config)
+        .then((resposta)=>{
+            console.log(resposta.data.message);
+            setDescription("");
+            setValue("");
+            navigate("/home");
+        })
+        .catch((error)=>{
+            console.log(error.response.data);
+        })
+    }
+
+    return (
+        <form onSubmit={addNewOutput}>
+            <ContainerAddOutput>
+                <HeaderAddOutput>Nova saída</HeaderAddOutput>
+                <ContainerInputsOutput>
+                    <input
+                        onChange={e => setValue(e.target.value)}
+                        value={value}
+                        type="number"
+                        placeholder="Valor"
+                        name="Valor"
+                        required
+                    />
+                    <input
+                        onChange={e => setDescription(e.target.value)}
+                        value={description}
+                        type="text"
+                        placeholder="Descrição"
+                        name="Descrição"
+                        required
+                    />
+                </ContainerInputsOutput>
+                <ContainerButtonOutput>
+                    <button type="submit">Salvar saída</button>
+                    <Link to={"/home"}><span>Cancelar</span></Link>
+                </ContainerButtonOutput>
+            </ContainerAddOutput>
+        </form>
     )
 }
 
@@ -35,6 +72,9 @@ const ContainerAddOutput = styled.div`
     flex-direction: column;
     justify-content: top;
     align-items: center;
+    a{
+        text-decoration: none;
+    }
 `
 const HeaderAddOutput = styled.header`
     width: 100%;
@@ -59,6 +99,8 @@ const ContainerInputsOutput = styled.div`
     justify-content: center;
     align-items: center;
     input{
+        box-sizing: border-box;
+        padding: 10px 15px;
         width: 326px;
         height: 58px;
         margin-bottom: 13px;
@@ -108,7 +150,7 @@ const ContainerButtonOutput = styled.div`
         font-family: 'Raleway';
         font-style: normal;
         font-weight: 700;
-        font-size: 15px;
+        font-size: 20px;
         line-height: 18px;
         color: #FFFFFF;
         text-decoration: underline;

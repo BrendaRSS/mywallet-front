@@ -4,6 +4,7 @@ import { TbCirclePlus } from "react-icons/tb";
 import { TbCircleMinus } from "react-icons/tb";
 import { useContext } from "react";
 import { DadosContext } from "../context/DadosContext";
+import { Link } from "react-router-dom";
 
 export default function FooterHomePage() {
     const {
@@ -18,8 +19,8 @@ export default function FooterHomePage() {
 
     return (
         <ContainerFooter>
-            <ButtonEntries><TbCirclePlus/>Nova <br /> entrada</ButtonEntries>
-            <ButtonOutputs onClick={teste}>< TbCircleMinus/>Nova <br /> saída</ButtonOutputs>
+           <Link to={"/entrada"}><ButtonEntries><TbCirclePlus/>Nova <br /> entrada</ButtonEntries></Link> 
+          <Link to={"/saida"}><ButtonOutputs>< TbCircleMinus/>Nova <br /> saída</ButtonOutputs></Link> 
         </ContainerFooter>
     )
 }

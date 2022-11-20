@@ -11,6 +11,8 @@ export default function ContextProvider({ children }) {
     const [token, setToken] = useState("")
     const [none, setNone] = useState("none")
     const [transacoes, setTransacoes] = useState("")
+    const [value, setValue] = useState("")
+    const [description, setDescription] = useState("")
 
     return (
         <DadosContext.Provider value={{
@@ -21,7 +23,9 @@ export default function ContextProvider({ children }) {
             token, setToken,
             none, setNone,
             confirmPassword, setConfirmPassword,
-            transacoes, setTransacoes
+            transacoes, setTransacoes,
+            value, setValue,
+            description, setDescription
         }}>
             {children}
         </DadosContext.Provider>

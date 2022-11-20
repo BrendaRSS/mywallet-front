@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import axios from "axios";
-import { useContext } from "react";
-import { DadosContext } from "../context/DadosContext";
 
 export default function Transacoes({ transacoes }) {
 
@@ -9,7 +6,7 @@ export default function Transacoes({ transacoes }) {
         <>
             <ContainerTransacoes>
                 {transacoes.map((t) =>
-                    <UnidadeTransacao>
+                    <UnidadeTransacao key={t._id}>
                         <DateTransacao>
                             {t.time}
                         </DateTransacao>
@@ -40,6 +37,7 @@ const ContainerTransacoes = styled.div`
 const UnidadeTransacao = styled.div`
     width: 95%;
     height: 35px;
+    margin-bottom: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -80,6 +78,7 @@ const SaldoTransacoes = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0px -8px 8px 0px rgba(0,0,0,0.26);
 `
 const TitleSaldo = styled.div`
     font-family: 'Raleway';
