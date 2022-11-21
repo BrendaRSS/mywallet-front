@@ -25,6 +25,10 @@ export default function HomePage() {
             })
             .catch((error) => {
                 console.log(error.response.data);
+                const status = error.response.status;
+                if(status === 401){
+                    console.log("Token não enviado ou usuário não encontrado no banco de dados!")
+                }
             })
     }, [])
 
@@ -111,5 +115,8 @@ const RecordsScreen = styled.div`
         width: 15px;
         border: 5px;
         background-color: red;
+    }
+    span{
+        margin-top: 60%;
     }
 `

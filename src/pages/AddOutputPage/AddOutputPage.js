@@ -30,6 +30,13 @@ export default function AddOutputPage() {
         })
         .catch((error)=>{
             console.log(error.response.data);
+            const status = error.response.status;
+            if(status === 422){
+                alert("Todos os campos precisam ser preenchidos adequadamente!");
+            }
+            if(status=== 401){
+                alert("Token não enviado ou usuário não encontrado!");
+            }
         })
     }
 

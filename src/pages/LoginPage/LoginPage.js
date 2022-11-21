@@ -29,6 +29,10 @@ export default function LoginPage() {
         })
         .catch((error)=>{
             console.log(error.response.data);
+            const status = error.response.status;
+            if(status === 401){
+                alert("Email e/ou senha incorretos!");
+            }
         })
     }
 

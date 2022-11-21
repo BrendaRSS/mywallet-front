@@ -2,6 +2,18 @@ import styled from "styled-components";
 
 export default function Transacoes({ transacoes }) {
 
+    let totalSaidas = transacoes.map((transacao) => transacao.type === "saída" ?
+        Number(transacao.value) : 0);
+
+    let somaSaidas = totalSaidas.reduce((soma, i) => soma + i);
+
+    let totalEntradas = transacoes.map((transacao) => transacao.type === "entrada" ?
+        Number(transacao.value) : 0);
+
+    let somaEntradas = totalEntradas.reduce((soma, i) => soma + i);
+
+    let saldo = Number(somaEntradas)- Number(somaSaidas);
+
     return (
         <>
             <ContainerTransacoes>
@@ -21,7 +33,7 @@ export default function Transacoes({ transacoes }) {
             </ContainerTransacoes>
             <SaldoTransacoes>
                 <TitleSaldo>SALDO</TitleSaldo>
-                <ValueSaldo>{1 + 1}</ValueSaldo>
+                <ValueSaldo saldo={saldo}>{saldo >= 0? saldo : saldo}</ValueSaldo>
             </SaldoTransacoes>
         </>
     )
@@ -95,5 +107,5 @@ const ValueSaldo = styled.div`
     font-size: 17px;
     line-height: 20px;
     text-align: right;
-    color: #C70000;
+    color: ${(props) => props.saldo >= 0? "#03AC00":"#C70000"};
 `
