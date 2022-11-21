@@ -21,7 +21,7 @@ export default function Transacoes({ transacoes }) {
             </ContainerTransacoes>
             <SaldoTransacoes>
                 <TitleSaldo>SALDO</TitleSaldo>
-                <ValueSaldo>R$600,00</ValueSaldo>
+                <ValueSaldo>{1 + 1}</ValueSaldo>
             </SaldoTransacoes>
         </>
     )

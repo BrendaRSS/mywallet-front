@@ -7,10 +7,10 @@ import { DadosContext } from "../../context/DadosContext";
 
 export default function LoginPage() {
     const {
-        name, setName,
+        setName,
         email, setEmail,
         password, setPassword,
-        token, setToken
+        setToken
     } = useContext(DadosContext);
     const navigate = useNavigate();
 
@@ -21,7 +21,6 @@ export default function LoginPage() {
 
         axios.post("http://localhost:5000/sign-in", body)
         .then((resposta)=>{
-            console.log(body);
             setToken(resposta.data.token);
             setEmail("");
             setPassword("");

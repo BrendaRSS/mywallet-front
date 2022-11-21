@@ -1,22 +1,10 @@
 import styled from "styled-components";
-import axios from "axios";
 import { TbCirclePlus } from "react-icons/tb";
 import { TbCircleMinus } from "react-icons/tb";
-import { useContext } from "react";
-import { DadosContext } from "../context/DadosContext";
 import { Link } from "react-router-dom";
 
 export default function FooterHomePage() {
-    const {
-        token
-    } = useContext(DadosContext);
   
-    console.log(token)
-
-    function teste(){
-        console.log(token)
-    }
-
     return (
         <ContainerFooter>
            <Link to={"/entrada"}><ButtonEntries><TbCirclePlus/>Nova <br /> entrada</ButtonEntries></Link> 

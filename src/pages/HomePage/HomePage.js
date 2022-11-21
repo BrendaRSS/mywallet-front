@@ -5,6 +5,7 @@ import FooterHomePage from "../../components/FooterHomePage";
 import { useContext, useEffect } from "react";
 import { DadosContext } from "../../context/DadosContext";
 import Transacoes from "../../components/Transacoes";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
     const {
@@ -34,7 +35,7 @@ export default function HomePage() {
     return (
         <ContainerHomePage>
             <HeaderHomePage>
-                <span>OLá, {name}</span><IoExitOutline />
+                <span>OLá, {name}</span><Link to={"/"}><IoExitOutline /></Link>
             </HeaderHomePage>
             <ContainerRecords>
                 <RecordsScreen>
