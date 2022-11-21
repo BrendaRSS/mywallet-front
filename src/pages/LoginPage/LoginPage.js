@@ -25,6 +25,7 @@ export default function LoginPage() {
             setToken(resposta.data.token);
             setEmail("");
             setPassword("");
+            setName(resposta.data.userExist.name)
             navigate("/home");
         })
         .catch((error)=>{

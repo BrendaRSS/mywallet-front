@@ -20,7 +20,6 @@ export default function HomePage() {
 
         axios.get("http://localhost:5000/transacoes", config)
             .then((resposta) => {
-                console.log(resposta.data);
                 setTransacoes(resposta.data)
             })
             .catch((error) => {
@@ -35,7 +34,7 @@ export default function HomePage() {
     return (
         <ContainerHomePage>
             <HeaderHomePage>
-                <span>OLá, Fulano</span><IoExitOutline />
+                <span>OLá, {name}</span><IoExitOutline />
             </HeaderHomePage>
             <ContainerRecords>
                 <RecordsScreen>
